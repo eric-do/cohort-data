@@ -1,3 +1,4 @@
 # Dependency directories
-node_modules/
-
+backend/node_modules
+backend/build
+.env
