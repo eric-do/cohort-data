@@ -1,9 +1,13 @@
 {
+  "exclude": [
+    "./server/__tests__"
+  ],
   "compilerOptions": {
     "types": [ "node", "jest" ],
     "module": "commonjs",
     "target": "es6",
     "rootDir": "./",
     "esModuleInterop": true,
+    "outDir": "./build",
   }
 }
