@@ -4,10 +4,13 @@
   ],
   "compilerOptions": {
     "types": [ "node", "jest" ],
-    "module": "commonjs",
+    "module": "CommonJS",
     "target": "es6",
     "rootDir": "./",
     "esModuleInterop": true,
     "outDir": "./build",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "moduleResolution": "node"
   }
 }
