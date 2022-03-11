@@ -1,17 +1,25 @@
 import request from 'supertest';
 import { Express } from 'express';
 import { init, app, DI } from '../app';
+const {
+  MYSQL_DATABASE,
+  MYSQL_USER,
+  MYSQL_PASSWORD,
+  MYSQL_HOST
+} = process.env
+
+console.log(MYSQL_USER)
 
 describe("/api/students", () => {
 
   beforeAll(async () => {
     try {
       await init;
-      DI.orm.config.set('host', 'db');
+      DI.orm.config.set('host', MYSQL_HOST);
       DI.orm.config.set('port', 3306);
-      DI.orm.config.set('user', 'test');
-      DI.orm.config.set('password', 'student');
-      DI.orm.config.set('dbName', 'education');
+      DI.orm.config.set('user', MYSQL_USER);
+      DI.orm.config.set('password', MYSQL_PASSWORD);
+      DI.orm.config.set('dbName', MYSQL_DATABASE);
       DI.orm.config.getLogger().setDebugMode(false);
       await DI.orm.config.getDriver().reconnect();
       await DI.orm.getSchemaGenerator().clearDatabase();

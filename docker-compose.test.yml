@@ -10,11 +10,14 @@ services:
     container_name: students_db
     command: --default-authentication-plugin=mysql_native_password
     restart: always
+    env_file:
+      - .env
     environment:
-      MYSQL_ROOT_PASSWORD: student
-      MYSQL_DATABASE: education
-      MYSQL_USER: test
-      MYSQL_PASSWORD: student
+      - MYSQL_ROOT_PASSWORD
+      - MYSQL_DATABASE
+      - MYSQL_USER
+      - MYSQL_PASSWORD
+      - MYSQL_HOST
     networks:
       - app-network
     ports:
