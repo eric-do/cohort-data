@@ -7,5 +7,9 @@ export default {
     Staff
   ],
   dbName: 'education',
-  type: 'postgresql' as "postgresql" | "mongo" | "mysql" | "mariadb" | "sqlite" | "better-sqlite",
+  host: 'localhost',
+  port: 3307,
+  username: 'test',
+  password: 'student',
+  type: 'mysql' as "postgresql" | "mongo" | "mysql" | "mariadb" | "sqlite" | "better-sqlite",
 };

@@ -6,17 +6,19 @@ services:
     command: npm test
 
   db:
-    image: postgres:14
+    image: mysql
     container_name: students_db
-    restart: unless-stopped
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=student
-      - POSTGRES_DB=education
+      MYSQL_ROOT_PASSWORD: student
+      MYSQL_DATABASE: education
+      MYSQL_USER: test
+      MYSQL_PASSWORD: student
     networks:
       - app-network
     ports:
-      - "5431:5432"
+      - "3307:3306"
 
 networks:
   app-network:

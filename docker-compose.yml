@@ -9,6 +9,7 @@ services:
       target: base
     container_name: students_node
     restart: unless-stopped
+    tty: true
     env_file:
       - .env
     environment:
@@ -19,9 +20,6 @@ services:
     volumes:
       - ./backend:/usr/src/app
       - ./backend/node_modules:/usr/src/app/node_modules
-    # depends_on:
-    #   db:
-    #     condition: service_started
     networks:
       - app-network
     command: npm run dev
