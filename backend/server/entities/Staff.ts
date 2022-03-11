@@ -25,6 +25,21 @@ export class Staff extends BaseEntity {
 
   @OneToMany(() => Cohort, cohort => cohort.techMentor)
   cohortsTM = new Collection<Cohort>(this);
+
+  constructor(
+    firstName: string,
+    lastName: string,
+    email: string,
+    preferredName: string = firstName,
+    role: StaffRole
+  ) {
+    super();
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.email = email;
+    this.preferredName = preferredName;
+    this.role = role;
+  }
 }
 
 export enum StaffRole {

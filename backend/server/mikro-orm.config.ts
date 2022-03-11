@@ -6,6 +6,6 @@ export default {
     Student,
     Staff
   ],
-  dbName: 'eduction',
+  dbName: 'education',
   type: 'postgresql' as "postgresql" | "mongo" | "mysql" | "mariadb" | "sqlite" | "better-sqlite",
 };
