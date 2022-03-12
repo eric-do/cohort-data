@@ -1,10 +1,9 @@
 {
   "exclude": [
-    "./server/__tests__",
     "node_modules"
   ],
   "compilerOptions": {
-    "types": [ "node", "jest"],
+    "types": ["jest", "node"],
     "module": "commonjs",
     "rootDir": "./",
     "esModuleInterop": true,
