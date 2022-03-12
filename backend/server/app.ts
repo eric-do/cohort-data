@@ -22,6 +22,8 @@ export const init = (async () => {
   DI.em = DI.orm.em;
 
   app.use((req, res, next) => RequestContext.create(DI.orm.em, next));
+  app.use(express.json());
+  app.use(express.urlencoded({ extended: true }));
 
   app.get('/', (req, res) => res.json({ message: 'Welcome to MikroORM express TS example, try CRUD on /author and /book endpoints!' }));
   app.use('/api/students', StudentsRouter);

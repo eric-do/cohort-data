@@ -1,15 +1,6 @@
 import { Entity, Enum, Index, Property, Unique, OneToMany, Collection } from "@mikro-orm/core";
 import { BaseEntity, Cohort } from ".";
 
-interface IStaff {
-  firstName: string;
-  lastName: string;
-  email: string;
-  preferredName: string;
-  role: StaffRole;
-  github: string | undefined;
-}
-
 @Entity()
 export class Staff extends BaseEntity {
 
@@ -36,13 +27,13 @@ export class Staff extends BaseEntity {
   @OneToMany(() => Cohort, cohort => cohort.techMentor)
   cohortsTM = new Collection<Cohort>(this);
 
-  constructor({
-    firstName,
-    lastName,
-    email,
-    role,
-    github
-  }: IStaff) {
+  constructor(
+    firstName: string,
+    lastName: string,
+    email: string,
+    role: StaffRole,
+    github: string | undefined
+  ) {
     super();
     this.firstName = firstName;
     this.lastName = lastName;

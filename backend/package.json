@@ -28,9 +28,11 @@
     "debug": "^4.3.3",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
+    "express-promise-router": "^4.1.1",
     "express-winston": "^4.2.0",
     "uuid": "^8.3.2",
-    "winston": "^3.6.0"
+    "winston": "^3.6.0",
+    "zod": "^3.13.4"
   },
   "devDependencies": {
     "@babel/core": "^7.17.5",

@@ -8,8 +8,6 @@ const {
   MYSQL_HOST
 } = process.env
 
-console.log(MYSQL_USER)
-
 describe("/api/students", () => {
 
   beforeAll(async () => {
@@ -33,7 +31,7 @@ describe("/api/students", () => {
     DI.server.close();
   });
 
-  test("It should respond to the POST method", async () => {
+  test('It responds with an error if fields are missing', async () => {
     const student = {
       github: 'student-github',
       email: 'student@mail.com',
@@ -43,7 +41,23 @@ describe("/api/students", () => {
       .post("/api/students")
       .send({ student })
 
+    expect(response.statusCode).toBe(400);
+  })
+
+  test("It should respond to the POST method", async () => {
+    const student = {
+      github: 'student-github',
+      email: 'student@mail.com',
+      firstName: 'test',
+      lastName: 'student'
+    };
+
+    const response = await request(app)
+      .post("/api/students")
+      .send({ student })
+
     expect(response.statusCode).toBe(201);
+    expect(response.body).toHaveProperty('id');
   });
 
   test("It should respond to the GET method", async () => {
