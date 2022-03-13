@@ -20,10 +20,13 @@ export const DI = {} as {
 export const init = (async () => {
   DI.orm = await MikroORM.init<PostgreSqlDriver>();
   DI.em = DI.orm.em;
+  DI.staffRepository = DI.orm.em.getRepository(Staff);
+  DI.studentRepository = DI.orm.em.getRepository(Student);
+  DI.cohortRepository = DI.orm.em.getRepository(Cohort);
 
-  app.use((req, res, next) => RequestContext.create(DI.orm.em, next));
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
+  app.use((req, res, next) => RequestContext.create(DI.orm.em, next));
 
   app.get('/', (req, res) => res.json({ message: 'Welcome to MikroORM express TS example, try CRUD on /author and /book endpoints!' }));
   app.use('/api/students', StudentsRouter);

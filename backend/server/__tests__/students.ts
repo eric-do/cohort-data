@@ -1,5 +1,4 @@
 import request from 'supertest';
-import { Express } from 'express';
 import { init, app, DI } from '../app';
 const {
   MYSQL_DATABASE,
@@ -57,7 +56,7 @@ describe("/api/students", () => {
       .send({ student })
 
     expect(response.statusCode).toBe(201);
-    expect(response.body).toHaveProperty('id');
+    expect(response.body).toHaveProperty('student');
   });
 
   test("It should respond to the GET method", async () => {

@@ -1,5 +1,4 @@
 import Router from 'express-promise-router';
-import { z } from 'zod';
 import { validateStudentInput } from '../middleware';
 import { addStudent } from '../controllers';
 
