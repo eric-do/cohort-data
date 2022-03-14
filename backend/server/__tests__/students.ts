@@ -41,6 +41,23 @@ describe("/api/students", () => {
       .send({ student })
 
     expect(response.statusCode).toBe(400);
+    expect(response.body).toHaveProperty('errors');
+  })
+
+  test('It responds with an error if email is invalid format', async () => {
+    const student = {
+      github: 'student-github',
+      email: 'student',
+      firstName: 'test',
+      lastName: 'student'
+    };
+
+    const response = await request(app)
+      .post("/api/students")
+      .send({ student })
+
+    expect(response.statusCode).toBe(400);
+    expect(response.body).toHaveProperty('errors');
   })
 
   test("It should respond to the POST method", async () => {
@@ -57,6 +74,7 @@ describe("/api/students", () => {
 
     expect(response.statusCode).toBe(201);
     expect(response.body).toHaveProperty('student');
+    expect(response.body.student).toHaveProperty('id');
   });
 
   test("It should respond to the GET method", async () => {

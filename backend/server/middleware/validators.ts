@@ -12,7 +12,7 @@ export const validateStudentInput = async (
     Student.parse(student);
     next();
   } catch (err) {
-    res.status(400).send();
+    next(err);
   }
 }
 
@@ -27,6 +27,6 @@ export const validateStaffInput = async (
     Staff.parse(staff);
     next();
   } catch (err) {
-    res.status(400).send();
+    next(err);
   }
 }

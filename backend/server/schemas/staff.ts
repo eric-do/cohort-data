@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from '@lib/zod';
 import { StaffRole } from '../entities';
 
 export const Staff = z.object({

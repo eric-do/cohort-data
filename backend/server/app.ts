@@ -4,6 +4,7 @@ import { StudentsRouter } from './routes';
 import { EntityManager, EntityRepository, MikroORM, RequestContext } from '@mikro-orm/core';
 import { PostgreSqlDriver } from '@mikro-orm/postgresql';
 import { Cohort, Staff, Student } from './entities';
+import * as Errors from './middleware/errorHandlers'
 
 export const app = express()
 const PORT = parseInt(process.env.PORT || '3000')
@@ -31,6 +32,9 @@ export const init = (async () => {
   app.get('/', (req, res) => res.json({ message: 'Welcome to MikroORM express TS example, try CRUD on /author and /book endpoints!' }));
   app.use('/api/students', StudentsRouter);
   app.use((req, res) => res.status(404).json({ message: 'No route found' }));
+  app.use(Errors.logErrors);
+  app.use(Errors.inputErrorHandler);
+  app.use(Errors.errorHandler);
 
   DI.server = app.listen(PORT, () => {
     console.log(`App listening on http://localhost:${PORT}`);
