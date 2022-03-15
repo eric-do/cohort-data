@@ -6,5 +6,6 @@ module.exports = {
   moduleNameMapper: {
     '@lib/(.*)': '<rootDir>/server/lib/$1',
     '@middleware': '<rootDir>/server/middleware',
+    '@test/(.*)': '<rootDir>/.jest/$1',
   }
 };

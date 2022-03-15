@@ -19,7 +19,8 @@
     "paths": {
       "@lib/*": ["./server/lib/*"],
       "@middleware": ["./server/middleware"],
-      "@middleware/*": ["./server/middleware/*"]
+      "@middleware/*": ["./server/middleware/*"],
+      "@test/*": ["./.jest/*"]
     }
   }
 }
