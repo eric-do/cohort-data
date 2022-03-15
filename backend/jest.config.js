@@ -2,4 +2,10 @@
 module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'node',
+  setupFiles: ["<rootDir>/.jest/setup.ts"],
+  moduleNameMapper: {
+    '@lib/(.*)': '<rootDir>/server/lib/$1',
+    '@middleware': '<rootDir>/server/middleware',
+    '@test/(.*)': '<rootDir>/.jest/$1',
+  }
 };

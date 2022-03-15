@@ -1,12 +1,21 @@
-import express from 'express';
-const router = express.Router();
+import Router from 'express-promise-router';
+import { validateStudentInput } from '../middleware';
+import { addStudent, getStudents } from '../controllers';
+import { sendResponse } from '@middleware';
 
-router.get('/', (req, res) => {
-  res.send('Hello world');
-});
+const router = Router();
 
-router.post('/', (req, res) => {
-  res.status(201).send('Hello world');
-});
+router.get(
+  '/',
+  getStudents,
+  sendResponse
+);
+
+router.post(
+  '/',
+  validateStudentInput,
+  addStudent,
+  sendResponse
+);
 
 export default router;
