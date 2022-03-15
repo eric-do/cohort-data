@@ -42,4 +42,24 @@ describe("/api/cohorts", () => {
     expect(response.body).toHaveProperty('cohort');
     expect(response.body.cohort).toHaveProperty('code');
   })
+
+  test('A GET returns cohort specific information', async () => {
+    const cohort = generateCohort();
+
+    await request(app)
+      .post("/api/cohorts")
+      .send({ cohort })
+
+    const response = await request(app)
+      .get(`/api/cohorts/${cohort.code}`)
+
+    expect(response.statusCode).toBe(200);
+    expect(response.body).toHaveProperty('cohort');
+    expect(response.body.cohort).toHaveProperty('code');
+    expect(response.body.cohort).toHaveProperty('techMentor');
+    expect(response.body.cohort).toHaveProperty('cohortLead');
+    expect(response.body.cohort).toHaveProperty('students');
+    expect(response.body.cohort).toHaveProperty('startDate');
+    expect(response.body.cohort).toHaveProperty('endDate');
+  })
 });

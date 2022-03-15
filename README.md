@@ -3,11 +3,11 @@ Repository for maintaining student records
 
 ## Development
 
-To set up an automated test environment, we need to use docker-compose to set up containers:
+To set up an automated test environment, use docker-compose to compose containers:
 - node
 - mysql
 
-We need to import schema from our entity definitions once the containers are running.
+MikroORM entities need to be manually imported to the schema.
 
 From `./backend`:
 ```
@@ -17,3 +17,14 @@ npx mikro-orm schema:fresh --run
 ```
 
 This runs the app and db in separate containers, and can be set up and tore down as convenient.
+
+## API
+
+| Method      | Endpoint             | Description                |
+| ----------- | -------------------  | ----------------------     |
+| GET         | /api/students        | Get a list of students     |
+| POST        | /api/students        | Add a new student          |
+| GET         | /api/cohorts         | Get a list of cohorts      |
+| GET         | /api/cohorts/:id     | Get a cohort's details     |
+| POST        | /api/cohorts         | Add a new cohort           |
+| POST        | /api/cohorts/:id     | Add students to a cohort   |
