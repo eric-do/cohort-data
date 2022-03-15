@@ -86,4 +86,50 @@ describe("/api/students", () => {
     expect(response.body).toHaveProperty('students');
     expect(response.body.students).toHaveLength(2)
   });
+
+  test("It should GET student by email", async () => {
+    const student = generateStudent();
+
+    await request(app)
+      .post("/api/students")
+      .send({ student });
+
+    await request(app)
+      .post("/api/students")
+      .send({ student: generateStudent() });
+
+    const response = await request(app)
+      .get("/api/students")
+      .query({
+        email: student.email
+      });
+
+    expect(response.statusCode).toBe(200);
+    expect(response.body).toHaveProperty('students');
+    expect(response.body.students).toHaveLength(1)
+    expect(response.body.students[0].email).toBe(student.email)
+  });
+
+  test("It should GET student by github", async () => {
+    const student = generateStudent();
+
+    await request(app)
+      .post("/api/students")
+      .send({ student });
+
+    await request(app)
+      .post("/api/students")
+      .send({ student: generateStudent() });
+
+    const response = await request(app)
+      .get("/api/students")
+      .query({
+        github: student.github
+      });
+
+    expect(response.statusCode).toBe(200);
+    expect(response.body).toHaveProperty('students');
+    expect(response.body.students).toHaveLength(1)
+    expect(response.body.students[0].github).toBe(student.github)
+  });
 });

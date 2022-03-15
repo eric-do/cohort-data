@@ -14,7 +14,8 @@ router.get(
 router.post(
   '/',
   validateStudentInput,
-  addStudent
+  addStudent,
+  sendResponse
 );
 
 export default router;
