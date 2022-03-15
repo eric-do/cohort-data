@@ -3,8 +3,8 @@ import { BaseEntity, Staff, Student } from ".";
 
 interface ICohort {
   code: string;
-  cohortLead: Staff;
-  techMentor: Staff;
+  cohortLead?: Staff;
+  techMentor?: Staff;
   startDate?: Date;
   endDate?: Date;
 }
@@ -15,19 +15,19 @@ export class Cohort {
   @PrimaryKey()
   code!: string;
 
-  @ManyToOne(() => Staff)
-  cohortLead!: Staff;
+  @ManyToOne(() => Staff, { nullable: true, default: null })
+  cohortLead?: Staff;
 
-  @ManyToOne(() => Staff)
-  techMentor!: Staff;
+  @ManyToOne(() => Staff, { nullable: true, default: null })
+  techMentor?: Staff;
 
   @ManyToMany(() => Student)
   students = new Collection<Student>(this);
 
-  @Property()
+  @Property({ nullable: true})
   startDate?: Date;
 
-  @Property()
+  @Property({ nullable: true})
   endDate?: Date;
 
   @Property()

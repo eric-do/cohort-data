@@ -1,6 +1,6 @@
 import request from 'supertest';
 import { init, app, DI } from '../app';
-import { generateStudent } from '../../.jest/helpers';
+import { generateStudent } from '@test/helpers';
 const {
   MYSQL_DATABASE,
   MYSQL_USER,
