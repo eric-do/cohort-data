@@ -4,6 +4,7 @@ module.exports = {
   testEnvironment: 'node',
   setupFiles: ["<rootDir>/.jest/setup.ts"],
   moduleNameMapper: {
-    '@lib/(.*)': '<rootDir>/server/lib/$1'
+    '@lib/(.*)': '<rootDir>/server/lib/$1',
+    '@middleware': '<rootDir>/server/middleware',
   }
 };

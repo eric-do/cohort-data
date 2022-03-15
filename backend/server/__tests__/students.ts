@@ -1,5 +1,6 @@
 import request from 'supertest';
 import { init, app, DI } from '../app';
+import { generateStudent } from '../../.jest/helpers';
 const {
   MYSQL_DATABASE,
   MYSQL_USER,
@@ -31,10 +32,9 @@ describe("/api/students", () => {
   });
 
   test('It responds with an error if fields are missing', async () => {
-    const student = {
-      github: 'student-github',
-      email: 'student@mail.com',
-    };
+    const student = generateStudent();
+    delete student.firstName;
+    delete student.lastName;
 
     const response = await request(app)
       .post("/api/students")
@@ -46,11 +46,9 @@ describe("/api/students", () => {
 
   test('It responds with an error if email is invalid format', async () => {
     const student = {
-      github: 'student-github',
-      email: 'student',
-      firstName: 'test',
-      lastName: 'student'
-    };
+      ...generateStudent(),
+      email: 'bad_email'
+    }
 
     const response = await request(app)
       .post("/api/students")
@@ -60,13 +58,8 @@ describe("/api/students", () => {
     expect(response.body).toHaveProperty('errors');
   })
 
-  test("It should respond to the POST method", async () => {
-    const student = {
-      github: 'student-github',
-      email: 'student@mail.com',
-      firstName: 'test',
-      lastName: 'student'
-    };
+  test("It should respond to a POST containing valid data", async () => {
+    const student = generateStudent();
 
     const response = await request(app)
       .post("/api/students")
@@ -78,9 +71,18 @@ describe("/api/students", () => {
   });
 
   test("It should respond to the GET method", async () => {
+    await request(app)
+      .post("/api/students")
+      .send({ student: generateStudent() });
+
+    await request(app)
+      .post("/api/students")
+      .send({ student: generateStudent() });
+
     const response = await request(app)
       .get("/api/students")
 
     expect(response.statusCode).toBe(200);
+    expect(response.body).toHaveProperty('students');
   });
 });

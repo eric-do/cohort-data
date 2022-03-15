@@ -1,12 +1,15 @@
 import Router from 'express-promise-router';
 import { validateStudentInput } from '../middleware';
-import { addStudent } from '../controllers';
+import { addStudent, getStudents } from '../controllers';
+import { sendResponse } from '@middleware';
 
 const router = Router();
 
-router.get('/', (req, res) => {
-  res.send('Hello world');
-});
+router.get(
+  '/',
+  getStudents,
+  sendResponse
+);
 
 router.post(
   '/',
