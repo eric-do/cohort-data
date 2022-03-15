@@ -1,6 +1,6 @@
 import request from 'supertest';
 import { init, app, DI } from '../app';
-import { generateCohort } from '@test/helpers';
+import { generateCohort, generateStudent } from '@test/helpers';
 const {
   MYSQL_DATABASE,
   MYSQL_USER,
@@ -61,5 +61,29 @@ describe("/api/cohorts", () => {
     expect(response.body.cohort).toHaveProperty('students');
     expect(response.body.cohort).toHaveProperty('startDate');
     expect(response.body.cohort).toHaveProperty('endDate');
+  })
+
+  test('Student can be added to a cohort', async () => {
+    const cohort = generateCohort();
+    const student = generateStudent();
+
+    await request(app)
+      .post("/api/cohorts")
+      .send({ cohort })
+
+    await request(app)
+      .post("/api/students")
+      .send({ student })
+
+    const postResponse = await request(app)
+      .post(`/api/cohorts/${cohort.code}`)
+      .send({ student })
+
+    const getResponse = await request(app)
+      .get(`/api/cohorts/${cohort.code}`)
+
+    expect(postResponse.statusCode).toBe(201)
+    expect(getResponse.statusCode).toBe(200)
+    expect(getResponse.body.cohort.students).toHaveLength(1);
   })
 });
