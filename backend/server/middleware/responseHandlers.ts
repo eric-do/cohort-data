@@ -6,5 +6,4 @@ export const sendResponse = (
   next: NextFunction
   ) => {
   res.send(res.locals);
-  next();
 }

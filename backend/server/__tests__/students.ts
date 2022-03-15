@@ -10,7 +10,7 @@ const {
 
 describe("/api/students", () => {
 
-  beforeAll(async () => {
+  beforeEach(async () => {
     try {
       await init;
       DI.orm.config.set('host', MYSQL_HOST);
@@ -26,7 +26,7 @@ describe("/api/students", () => {
     }
   });
 
-  afterAll(async () => {
+  afterEach(async () => {
     await DI.orm.close(true);
     DI.server.close();
   });
@@ -84,5 +84,6 @@ describe("/api/students", () => {
 
     expect(response.statusCode).toBe(200);
     expect(response.body).toHaveProperty('students');
+    expect(response.body.students).toHaveLength(2)
   });
 });
