@@ -26,7 +26,11 @@ export const getStudents = async (
   ) => {
   const { query } = req;
   try {
-    res.locals.students = await DI.em.find(Student, query);
+    res.locals.students = await DI.em.find(
+      Student,
+      query,
+      { populate: ['cohorts'] }
+    );
     res.status(200);
     next();
   } catch (err) {

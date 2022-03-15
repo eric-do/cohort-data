@@ -79,11 +79,20 @@ describe("/api/cohorts", () => {
       .post(`/api/cohorts/${cohort.code}`)
       .send({ student })
 
-    const getResponse = await request(app)
+    const getCohortResponse = await request(app)
       .get(`/api/cohorts/${cohort.code}`)
 
+    const getStudentresponse = await request(app)
+      .get("/api/students")
+      .query({
+        github: student.github
+      });
+
     expect(postResponse.statusCode).toBe(201)
-    expect(getResponse.statusCode).toBe(200)
-    expect(getResponse.body.cohort.students).toHaveLength(1);
+    expect(getCohortResponse.body.cohort.students).toHaveLength(1);
+    expect(getStudentresponse.body).toHaveProperty('students');
+    expect(getStudentresponse.body.students).toHaveLength(1);
+    expect(getStudentresponse.body.students[0]).toHaveProperty('cohorts');
+    expect(getStudentresponse.body.students[0].cohorts).toHaveLength(1);
   })
 });
